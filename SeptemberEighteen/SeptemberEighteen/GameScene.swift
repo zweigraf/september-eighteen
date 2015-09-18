@@ -18,6 +18,12 @@ class GameScene: SKScene {
         createGrid()
         createWalls()
         
+        let hero = self.childNodeWithName("hero")
+        let herobody = hero?.physicsBody
+        herobody?.affectedByGravity = false
+        herobody?.restitution = 0.0
+        herobody?.linearDamping = 0.0
+        herobody?.angularDamping = 1.0
         
         if let cameraNode = camera {
             createButtons(cameraNode)

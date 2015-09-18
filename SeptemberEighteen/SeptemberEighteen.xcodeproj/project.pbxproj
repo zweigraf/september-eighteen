@@ -78,6 +78,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5271E7C1BACAA1F00DD8734 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A596A91C1BAC98A600588531 /* GameScene.sks */,
+				A596A9221BAC98A600588531 /* Main.storyboard */,
+				A596A9271BAC98A600588531 /* LaunchScreen.storyboard */,
+				A596A9251BAC98A600588531 /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		A5271E7D1BACAA3100DD8734 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				A596A91A1BAC98A600588531 /* AppDelegate.swift */,
+				A596A91E1BAC98A600588531 /* GameScene.swift */,
+				A596A9201BAC98A600588531 /* GameViewController.swift */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
 		A596A90E1BAC98A600588531 = {
 			isa = PBXGroup;
 			children = (
@@ -101,13 +122,8 @@
 		A596A9191BAC98A600588531 /* SeptemberEighteen */ = {
 			isa = PBXGroup;
 			children = (
-				A596A91A1BAC98A600588531 /* AppDelegate.swift */,
-				A596A91C1BAC98A600588531 /* GameScene.sks */,
-				A596A91E1BAC98A600588531 /* GameScene.swift */,
-				A596A9201BAC98A600588531 /* GameViewController.swift */,
-				A596A9221BAC98A600588531 /* Main.storyboard */,
-				A596A9251BAC98A600588531 /* Assets.xcassets */,
-				A596A9271BAC98A600588531 /* LaunchScreen.storyboard */,
+				A5271E7D1BACAA3100DD8734 /* Code */,
+				A5271E7C1BACAA1F00DD8734 /* Assets */,
 				A596A92A1BAC98A600588531 /* Info.plist */,
 			);
 			path = SeptemberEighteen;
@@ -493,6 +509,7 @@
 				A596A9451BAC98A600588531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A596A9461BAC98A600588531 /* Build configuration list for PBXNativeTarget "SeptemberEighteenTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +518,7 @@
 				A596A9481BAC98A600588531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A596A9491BAC98A600588531 /* Build configuration list for PBXNativeTarget "SeptemberEighteenUITests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +527,7 @@
 				A596A94B1BAC98A600588531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

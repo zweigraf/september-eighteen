@@ -9,10 +9,19 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    let leftButton = SKLabelNode(text: "left")
+    let rightButton = SKLabelNode(text: "right")
+    let upButton = SKLabelNode(text: "up")
+    let downButton = SKLabelNode(text: "down")
+
     override func didMoveToView(view: SKView) {
         createGrid()
         createWalls()
         
+        
+        if let cameraNode = camera {
+            createButtons(cameraNode)
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -48,5 +57,17 @@ class GameScene: SKScene {
         }
         
         self.addChild(grid)
+    }
+    
+    func createButtons(camera: SKCameraNode) {
+        leftButton.position = CGPoint(x: CGRectGetMinX(self.frame) + 20, y: CGRectGetMidY(self.frame))
+        rightButton.position = CGPoint(x: CGRectGetMaxX(self.frame) - 20, y: CGRectGetMidY(self.frame))
+        upButton.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 20)
+        downButton.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + 20)
+        
+        camera.addChild(leftButton)
+        camera.addChild(rightButton)
+        camera.addChild(upButton)
+        camera.addChild(downButton)
     }
 }

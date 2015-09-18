@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     let leftButton = SKLabelNode(text: "left")
@@ -24,6 +25,7 @@ class GameScene: SKScene {
         herobody?.restitution = 0.0
         herobody?.linearDamping = 0.0
         herobody?.angularDamping = 1.0
+        self.listener = hero
         
         if let cameraNode = camera {
             createButtons(cameraNode)
@@ -36,6 +38,15 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             
+            let audioparent = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: 50, height: 50))
+            audioparent.position = location
+            audioparent.physicsBody = SKPhysicsBody(rectangleOfSize: audioparent.frame.size)
+            audioparent.physicsBody?.affectedByGravity = false
+            let audioNode = SKAudioNode(fileNamed: "432.wav")
+            audioNode.positional = true
+            audioparent.addChild(audioNode)
+            
+            self.addChild(audioparent)
             
         }
     }
@@ -47,6 +58,7 @@ class GameScene: SKScene {
     func createWalls() {
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
     }
+    
     func createGrid() {
         let rect = self.frame
         let grid = SKNode()

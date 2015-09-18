@@ -10,6 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
+        createWalls()
         
     }
     
@@ -25,5 +26,9 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+    }
+    
+    func createWalls() {
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
     }
 }

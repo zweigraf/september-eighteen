@@ -10,6 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
+        createGrid()
         createWalls()
         
     }
@@ -30,5 +31,22 @@ class GameScene: SKScene {
     
     func createWalls() {
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+    }
+    func createGrid() {
+        let rect = self.frame
+        let grid = SKNode()
+        grid.zPosition -= 1
+        for var x = CGRectGetMinX(rect); x < CGRectGetMaxX(rect); x += 50 {
+            let node = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 5, height: CGRectGetHeight(rect)))
+            node.position = CGPoint(x: x, y: CGRectGetMidY(rect))
+            grid.addChild(node)
+        }
+        for var y = CGRectGetMinY(rect); y < CGRectGetMaxY(rect); y += 50 {
+            let node = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: CGRectGetWidth(rect), height: 5))
+            node.position = CGPoint(x: CGRectGetMidX(rect), y: y)
+            grid.addChild(node)
+        }
+        
+        self.addChild(grid)
     }
 }

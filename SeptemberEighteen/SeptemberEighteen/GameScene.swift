@@ -60,18 +60,45 @@ class GameScene: SKScene {
     }
     
     func createGrid() {
+        let gridLineWidth = 2
+        let gridLineColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        let gridTextFontSize = UIFont.smallSystemFontSize()
+        let gridTextLeftOffset = CGFloat(50)
+        let gridTextBottomOffset = CGFloat(50)
+        
         let rect = self.frame
+        
         let grid = SKNode()
         grid.zPosition -= 1
-        for var x = CGRectGetMinX(rect); x < CGRectGetMaxX(rect); x += 50 {
-            let node = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 5, height: CGRectGetHeight(rect)))
-            node.position = CGPoint(x: x, y: CGRectGetMidY(rect))
+        
+        for var x = CGRectGetMinX(rect); x < CGRectGetMaxX(rect) + 50; x += 50 {
+            x = min(x, CGRectGetMaxX(rect))
+            let y = CGRectGetMidY(rect)
+        
+            let node = SKSpriteNode(color: gridLineColor, size: CGSize(width: gridLineWidth, height: Int(CGRectGetHeight(rect))))
+            node.position = CGPoint(x: x, y: y)
             grid.addChild(node)
+            
+            let label = SKLabelNode(text: "\(Int(x))")
+            label.color = gridLineColor
+            label.fontSize = gridTextFontSize
+            label.position = CGPoint(x: x, y: CGRectGetMinY(rect) - gridTextBottomOffset)
+            grid.addChild(label)
         }
-        for var y = CGRectGetMinY(rect); y < CGRectGetMaxY(rect); y += 50 {
-            let node = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: CGRectGetWidth(rect), height: 5))
-            node.position = CGPoint(x: CGRectGetMidX(rect), y: y)
+        
+        for var y = CGRectGetMinY(rect); y < CGRectGetMaxY(rect) + 50; y += 50 {
+            y = min(y, CGRectGetMaxY(rect))
+            let x = CGRectGetMidX(rect)
+            
+            let node = SKSpriteNode(color: gridLineColor, size: CGSize(width: Int(CGRectGetWidth(rect)), height: gridLineWidth))
+            node.position = CGPoint(x: x, y: y)
             grid.addChild(node)
+            
+            let label = SKLabelNode(text: "\(Int(y))")
+            label.color = gridLineColor
+            label.fontSize = gridTextFontSize
+            label.position = CGPoint(x: CGRectGetMinX(rect) - gridTextLeftOffset, y: y)
+            grid.addChild(label)
         }
         
         self.addChild(grid)

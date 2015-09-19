@@ -105,7 +105,7 @@ class GameScene: SKScene {
             grid.addChild(node)
             
             let label = SKLabelNode(text: "\(Int(x))")
-            label.color = gridLineColor
+            label.fontColor = gridLineColor
             label.fontSize = gridTextFontSize
             label.position = CGPoint(x: x, y: CGRectGetMinY(rect) - gridTextBottomOffset)
             grid.addChild(label)
@@ -120,7 +120,7 @@ class GameScene: SKScene {
             grid.addChild(node)
             
             let label = SKLabelNode(text: "\(Int(y))")
-            label.color = gridLineColor
+            label.fontColor = gridLineColor
             label.fontSize = gridTextFontSize
             label.position = CGPoint(x: CGRectGetMinX(rect) - gridTextLeftOffset, y: y)
             grid.addChild(label)

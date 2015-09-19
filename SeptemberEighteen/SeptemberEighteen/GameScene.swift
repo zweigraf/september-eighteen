@@ -21,12 +21,6 @@ class GameScene: SKScene {
         
         let hero = self.childNodeWithName("hero")
         hero?.position = CGPoint(x:CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        let herobody = hero?.physicsBody
-        herobody?.allowsRotation = false
-        herobody?.affectedByGravity = false
-        herobody?.restitution = 0.0
-        herobody?.linearDamping = 0.0
-        herobody?.angularDamping = 0.0
         self.listener = hero
         
         if let cameraNode = camera {

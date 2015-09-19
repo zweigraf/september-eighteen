@@ -37,6 +37,29 @@ class GameScene: SKScene {
         
         for touch in touches {
             let location = touch.locationInNode(self)
+            var shouldAddAudioNode = true
+
+            buttonhandler: if let cameraNode = camera {
+                let cameralocation = touch.locationInNode(cameraNode)
+                let button = cameraNode.nodeAtPoint(cameralocation)
+                guard button != cameraNode else {
+                    break buttonhandler
+                }
+                
+                guard (button.name != nil) else {
+                    break buttonhandler
+                }
+                
+                if let action = actionForButtonName(button.name!) {
+                    self.childNodeWithName("hero")?.runAction(action)
+                    
+                    shouldAddAudioNode = false
+                }
+            }
+            
+            guard shouldAddAudioNode else {
+                continue
+            }
             
             let audioparent = SKSpriteNode(color: SKColor.greenColor(), size: CGSize(width: 50, height: 50))
             audioparent.position = location
@@ -105,14 +128,53 @@ class GameScene: SKScene {
     }
     
     func createButtons(camera: SKCameraNode) {
-        leftButton.position = CGPoint(x: CGRectGetMinX(self.frame) + 20, y: CGRectGetMidY(self.frame))
-        rightButton.position = CGPoint(x: CGRectGetMaxX(self.frame) - 20, y: CGRectGetMidY(self.frame))
-        upButton.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 20)
-        downButton.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + 20)
+        let distance = 200;
+        leftButton.position = CGPoint(x: -distance, y: 0)// CGPoint(x: CGRectGetMinX(self.frame) + 50, y: CGRectGetMidY(self.frame))
+        rightButton.position = CGPoint(x: distance, y: 0)//(x: CGRectGetMaxX(self.frame) - 50, y: CGRectGetMidY(self.frame))
+        upButton.position = CGPoint(x: 0, y: distance)//(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 50)
+        downButton.position = CGPoint(x: 0, y: -distance)//(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + 50)
+        
+        
+        leftButton.name = "button_left"
+        rightButton.name = "button_right"
+        upButton.name = "button_up"
+        downButton.name = "button_down"
         
         camera.addChild(leftButton)
         camera.addChild(rightButton)
         camera.addChild(upButton)
         camera.addChild(downButton)
+    }
+    
+    func actionForButtonName(name: String) -> SKAction? {
+        let prefix = "button_"
+        guard name.hasPrefix(prefix) else {
+            return nil
+        }
+        
+        let suffix = name.stringByReplacingOccurrencesOfString(prefix, withString: "")
+        let distance = 50;
+        var deltaX = 50
+        var deltaY = 50
+        switch suffix {
+        case "left" :
+            deltaX = -distance
+            deltaY = 0
+        case "right" :
+            deltaX = distance
+            deltaY = 0
+        case "up" :
+            deltaX = 0;
+            deltaY = distance
+        case "down" :
+            deltaX = 0;
+            deltaY = -distance
+        default :
+            return nil
+        }
+        
+        
+        let moveVector = CGVector(dx: deltaX, dy: deltaY)
+        return SKAction.applyForce(moveVector, duration: 1.0)
     }
 }

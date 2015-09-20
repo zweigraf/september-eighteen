@@ -14,21 +14,28 @@ class GameScene: SKScene {
     let rightButton = SKLabelNode(text: "right")
     let upButton = SKLabelNode(text: "up")
     let downButton = SKLabelNode(text: "down")
-
+    weak var heroNode : SKSpriteNode?
+    
     override func didMoveToView(view: SKView) {
         createGrid()
         createWalls()
         
         let hero = self.childNodeWithName("hero")
         hero?.position = CGPoint(x:CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        heroNode = hero as? SKSpriteNode
+        
         self.listener = hero
         
         let animationAction = SKAction.repeatActionForever(SKAction.animateWithTextures([SKTexture(imageNamed: "Walk1"), SKTexture(imageNamed: "Walk2")], timePerFrame : 0.1, resize: true, restore: false))
         
         hero?.runAction(animationAction, withKey: "animation")
+        
+        
         if let cameraNode = camera {
             createButtons(cameraNode)
         }
+        
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -75,6 +82,12 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        
+        if heroNode?.physicsBody?.resting == true {
+            heroNode?.removeActionForKey("animation")
+            heroNode?.runAction(SKAction.setTexture(SKTexture(imageNamed: "Idle")))
+            
+        }
     }
     
     func createWalls() {

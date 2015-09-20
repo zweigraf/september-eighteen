@@ -23,6 +23,9 @@ class GameScene: SKScene {
         hero?.position = CGPoint(x:CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         self.listener = hero
         
+        let animationAction = SKAction.repeatActionForever(SKAction.animateWithTextures([SKTexture(imageNamed: "Walk1"), SKTexture(imageNamed: "Walk2")], timePerFrame : 0.1, resize: true, restore: false))
+        
+        hero?.runAction(animationAction, withKey: "animation")
         if let cameraNode = camera {
             createButtons(cameraNode)
         }

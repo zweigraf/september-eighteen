@@ -1,6 +1,10 @@
 # september-eighteen
 
+Explore spatial audio.
+
 SpriteKit Anti Gravity Fun. WIP/Experiment.
+
+![Screenshot](september-eighteen-screen.png)
 
 ## Assets
 
